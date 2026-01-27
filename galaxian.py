@@ -1,20 +1,19 @@
 import sys
 import pygame
 
-WIDTH, HEIGHT = 1200, 800
-FPS = 60
-BACKGROUND_COLOR = (230, 230, 230)
+from settings import Settings
 
 class Galaxian:
     """Class for managing game resources and behavior"""
 
-    def __init__(self, width: int, height: int, fps: int, background_color: tuple[int, int, int]):
+    def __init__(self, settings):
         pygame.init()
+        self.settings = settings
 
         self.clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode((width, height))
-        self.fps = fps
-        self.background_color = background_color
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.fps = self.settings.fps
+        self.background_color = self.settings.background_color
 
         pygame.display.set_caption("Galaxian")
 
@@ -35,5 +34,5 @@ class Galaxian:
             pygame.display.flip()
 
 if __name__ == "__main__":
-    ai = Galaxian(WIDTH, HEIGHT, FPS, BACKGROUND_COLOR)
-    ai.run_game()
+    galaxian = Galaxian(Settings())
+    galaxian.run_game()
