@@ -11,7 +11,10 @@ class Galaxian:
         self.settings = settings
 
         self.clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height), pygame.FULLSCREEN)
+        if not self.settings.fullscreen:
+            self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        else:
+            self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.fps = self.settings.fps
         self.background_color = self.settings.background_color
 
@@ -31,7 +34,13 @@ class Galaxian:
         """Processes keystrokes and mouse events"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.quit()
                 sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
 
     def _update_screen(self) -> None:
         """Updates the images on the screen and displays a new screen."""
