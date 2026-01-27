@@ -4,11 +4,11 @@ class Ship:
     def __init__(self, game):
         """Init spaceship and setup start position"""
 
-        self.screen = game.screen
+        self.screen = game
         self.screen_rect = self.screen.get_rect()
 
         # Load starship image and get rectangle
-        self.image = pygame.image.load("images/ship.png")
+        self.image = pygame.image.load("images/ship.bmp")
         self.rect = self.image.get_rect()
 
         # Show spaceship at the bottom edge of the screen
