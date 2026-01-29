@@ -50,6 +50,7 @@ class Galaxian:
         pygame.display.flip()
 
     def _check_keydown_events(self, event) -> None:
+        """Responds to key presses"""
         if event.key == pygame.K_ESCAPE:
             pygame.quit()
             sys.exit()
@@ -59,6 +60,7 @@ class Galaxian:
             self.ship.moving_left = True
 
     def _check_keyup_events(self, event) -> None:
+        """Responds to key release"""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
