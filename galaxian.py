@@ -34,8 +34,7 @@ class Galaxian:
         """Processes keystrokes and mouse events"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                self._quit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
@@ -52,8 +51,7 @@ class Galaxian:
     def _check_keydown_events(self, event) -> None:
         """Responds to key presses"""
         if event.key == pygame.K_ESCAPE:
-            pygame.quit()
-            sys.exit()
+            self._quit()
         elif event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
@@ -66,6 +64,10 @@ class Galaxian:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    @staticmethod
+    def _quit() -> None:
+        pygame.quit()
+        sys.exit()
 
 if __name__ == "__main__":
     galaxian = Galaxian(Settings())
