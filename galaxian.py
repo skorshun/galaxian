@@ -22,7 +22,7 @@ class Galaxian:
 
         self.ship = Ship(self.screen)
 
-    def run_game(self):
+    def run_game(self) -> None:
         """Start main game loop"""
         while True:
             self._check_events()

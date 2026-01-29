@@ -14,16 +14,18 @@ class Ship:
         # Show spaceship at the bottom edge of the screen
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # Movement flags
         self.moving_right = False
         self.moving_left = False
 
-    def blitme(self):
+    def blitme(self) -> None:
         """Draw spaceship at the current position"""
         self.screen.blit(self.image, self.rect)
 
-    def update(self):
+    def update(self) -> None:
         """Update position regarding moving_right flag"""
         if self.moving_right:
             self.rect.x += 1
-        elif self.moving_left:
+
+        if self.moving_left:
             self.rect.x -= 1
