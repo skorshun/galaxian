@@ -37,22 +37,9 @@ class Galaxian:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
-                elif event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True
-                elif event.key == pygame.K_UP:
-                    self.ship.rect.y -= 1
-                elif event.key == pygame.K_DOWN:
-                    self.ship.rect.y += 1
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
 
     def _update_screen(self) -> None:
         """Updates the images on the screen and displays a new screen."""
@@ -61,6 +48,22 @@ class Galaxian:
 
         # Displaying the last screen drawn
         pygame.display.flip()
+
+    def _check_keydown_events(self, event) -> None:
+        if event.key == pygame.K_ESCAPE:
+            pygame.quit()
+            sys.exit()
+        elif event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+
+    def _check_keyup_events(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+
 
 if __name__ == "__main__":
     galaxian = Galaxian(Settings())
