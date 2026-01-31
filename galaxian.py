@@ -4,6 +4,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class Galaxian:
     """Class for managing game resources and behavior"""
@@ -26,6 +27,9 @@ class Galaxian:
 
         self.ship = Ship(self.screen)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self) -> None:
         """Start main game loop"""
@@ -52,6 +56,7 @@ class Galaxian:
         for bullet in self.bullets.sprites():
             bullet.draw()
         self.ship.blitme()
+        self.aliens.draw(self.screen)
 
         # Displaying the last screen drawn
         pygame.display.flip()
@@ -89,6 +94,10 @@ class Galaxian:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+    def _create_fleet(self):
+        alien = Alien(self)
+        self.aliens.add(alien)
 
     @staticmethod
     def _quit() -> None:
