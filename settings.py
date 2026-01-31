@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-@dataclass(frozen=True)
+@dataclass
 class Settings:
     fullscreen: bool = False
     screen_width: int = 1200

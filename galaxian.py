@@ -18,6 +18,9 @@ class Galaxian:
         self.fps = self.settings.fps
         self.background_color = self.settings.background_color
 
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
+
         pygame.display.set_caption("Galaxian")
 
         self.ship = Ship(self.screen)
