@@ -14,3 +14,4 @@ class Settings:
     bullet_width:int = 3
     bullet_height: int = 15
     bullet_color: tuple[int, int, int] = (60, 60, 60)
+    bullets_allowed = 6

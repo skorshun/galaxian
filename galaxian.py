@@ -32,12 +32,7 @@ class Galaxian:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-            # remove projectile objects that have left the work surface
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-
+            self._update_bullets()
             self._update_screen()
             self.clock.tick(self.fps) / 1000.0
 
@@ -81,8 +76,19 @@ class Galaxian:
 
     def _fire_bullet(self):
         """Creates a new projectile and adds it to the bullets group."""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        #  Limiting the number of projectiles per group.
+        #  That is, only a certain number of shells can be on the screen at a time.
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Updates projectile positions and destroys old projectiles."""
+        self.bullets.update()
+        # remove projectile objects that have left the work surface
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     @staticmethod
     def _quit() -> None:
