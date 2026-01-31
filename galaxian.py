@@ -33,9 +33,11 @@ class Galaxian:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+            # remove projectile objects that have left the work surface
             for bullet in self.bullets.copy():
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
+
             self._update_screen()
             self.clock.tick(self.fps) / 1000.0
 
