@@ -33,6 +33,9 @@ class Galaxian:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
             self._update_screen()
             self.clock.tick(self.fps) / 1000.0
 
