@@ -37,13 +37,15 @@ class Galaxian:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._check_fleet_edges()
+            self._update_aliens()
             self._update_screen()
             self.clock.tick(self.fps) / 1000.0
 
     def _check_events(self) -> None:
         """Processes keystrokes and mouse events"""
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame. QUIT:
                 self._quit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -95,6 +97,10 @@ class Galaxian:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _update_aliens(self):
+        """Updates the positions of all newcomers in the fleet."""
+        self.aliens.update()
+
     def _create_fleet(self):
         """Creates a fleet of aliens."""
         alien = Alien(self)
@@ -105,6 +111,19 @@ class Galaxian:
         while current_x < (self.settings.screen_width - 2 * alien_width):
             self._create_alien(current_x)
             current_x += 2 * alien_width
+
+    def _check_fleet_edges(self):
+        """comment here"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        """comment here"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
     def _create_alien(self, x_position):
         """Creates an alien and places it in the row."""
