@@ -112,6 +112,10 @@ class Galaxian:
         """Updates the positions of all newcomers in the fleet."""
         self.aliens.update()
 
+        # Check collisions "alien - spaceship"
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("OMG! Ship HIT!!!")
+
     def _create_fleet(self):
         """Creates a fleet of aliens."""
         alien = Alien(self)
