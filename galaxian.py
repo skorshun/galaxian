@@ -97,6 +97,14 @@ class Galaxian:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+        # Check for hits on aliens.
+        # If a hit is detected, remove the projectile and the alien.
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            self.bullets.empty()
+            self._create_fleet()
+
     def _update_aliens(self):
         """Updates the positions of all newcomers in the fleet."""
         self.aliens.update()
